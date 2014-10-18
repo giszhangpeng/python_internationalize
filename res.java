@@ -1,0 +1,20 @@
+
+String ﻿HCMS_AB_COMMA="﻿hcms_ab_comma";
+String HCMS_AB_ENDTIME="hcms_ab_endtime";
+String HCMS_AB_VAGUESEARCH="hcms_ab_vaguesearch";
+String HCMS_AB_DRIVER="hcms_ab_driver";
+String HCMS_AB_MONTHSTATISTIC="hcms_ab_monthstatistic";
+String HCMS_AB_ACCDECSTATISTIC="hcms_ab_accdecstatistic";
+String HCMS_AB_TOTALTIMES="hcms_ab_totaltimes";
+String HCMS_AB_BRATIMES="hcms_ab_bratimes";
+String HCMS_AB_MONTH="hcms_ab_month";
+String HCMS_ABCS_ACCELERATE="hcms_abcs_accelerate";
+String HCMS_AB_TOTALNAME="hcms_ab_totalname";
+String HCMS_AB_CARNUM="hcms_ab_carnum";
+String HCMS_ABCS_MONTH="hcms_abcs_month";
+String HCMS_AB_ACCTIMES="hcms_ab_acctimes";
+String HCMS_AB_FRISTNAME="hcms_ab_fristname";
+String HCMS_AB_LASTNAME="hcms_ab_lastname";
+String HCMS_AB_SEARCH="hcms_ab_search";
+String HCMS_ABCS_BRAKE="hcms_abcs_brake";
+String HCMS_ABCS_HOUR="hcms_abcs_hour";
