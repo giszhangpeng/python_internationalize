@@ -1,0 +1,23 @@
+{
+    "src": {
+        "jsp": [
+            "acceleratebrake.jsp"
+        ],
+        "js": [
+            "accelerate.js"
+        ],
+        "java":[
+            "AccelerateBrakeColumnService.java"
+        ]
+    },
+    "output": {
+        "locale": "locale.txt",
+        "res": "resConst.txt"
+    },
+    "properties": "LocaleRes_zh-CN.properties",
+    "target":{
+        "jsp":"<%= UserDefaultUtil.get(ResConstString.$) %>",
+        "java":"UserDefaultUtil.get(ResConstString.$)",
+        "js":"hcms_i18n.$"
+    }
+}
