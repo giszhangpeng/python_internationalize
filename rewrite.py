@@ -23,8 +23,6 @@ class Rewrite(object):
 		target_str = self.config['target'][file_type]
 		if file_type == 'js':
 			dic = self.ver.locale_dict
-			# print u'js中的匹配字符为' + value_match.group()
-			# print dic
 		value = value_match.group()
 		result = None
 
@@ -43,21 +41,6 @@ class Rewrite(object):
 		file_type = self.file_type
 		if file_type != 'jsp':
 			regex = r'\'[\x80-\xff]+\'|\"[\x80-\xff]+\"'
-
-		# while True:
-		# 	se = re.search(regex,all_text)
-		# 	if not se:
-		# 		break
-		# 	print u"搜索的中文字符串为：" + se.group()
-		# 	if file_type != 'jsp':
-		# 		# all_text = all_text[:se.start()-1] + all_text[se.start():]
-		# 		# all_text = all_text[:se.end()] + all_text[(se.end()+1):]
-
-
-		# 	key = self.find_key(dic,se.group())
-		# 	if key:	
-		# 		target_str = target_str.replace('$',key.upper())
-		# 		re.sub(regex,target_str,all_text,1)
 		result_text = re.sub(regex,self.find_key,all_text,0)
 
 		return result_text
@@ -75,13 +58,15 @@ class Rewrite(object):
 		jsp_list = self.config['src']['jsp']
 		for i in range(len(jsp_list)):
 			file_obj = open(jsp_list[i],'r+')
+			file_result = open('output\\'+jsp_list[i].split('\\')[-1],'w')
 			try:
 				jsp_text = file_obj.read()
 				result_text = self.replace_cn(jsp_text)
-				file_obj.seek(0)
-				file_obj.write(result_text)
+				#file_obj.seek(0)
+				file_result.write(result_text)
 			finally:
 				file_obj.close()
+				file_result.close()
 				print jsp_list[i] + u'更改成功'
 
 
@@ -90,13 +75,15 @@ class Rewrite(object):
 		js_list = self.config['src']['js']
 		for i in range(len(js_list)):
 			file_obj = open(js_list[i],'r+')
+			file_result = open('output\\'+js_list[i].split('\\')[-1],'w')
 			try:
 				js_text = file_obj.read()
 				result_text = self.replace_cn(js_text)
-				file_obj.seek(0)
-				file_obj.write(result_text)
+				#file_obj.seek(0)
+				file_result.write(result_text)
 			finally:
 				file_obj.close()
+				file_result.close()
 				print js_list[i] + u'更改成功'
 
 	def write_java(self):
@@ -104,13 +91,15 @@ class Rewrite(object):
 		java_list = self.config['src']['java']
 		for i in range(len(java_list)):
 			file_obj = open(java_list[i],'r+')
+			file_result = open('output\\'+java_list[i].split('\\')[-1],'w')
 			try:
 				java_text = file_obj.read()
 				result_text = self.replace_cn(java_text)
-				file_obj.seek(0)
-				file_obj.write(result_text)
+				#file_obj.seek(0)
+				file_result.write(result_text)
 			finally:
 				file_obj.close()
+				file_result.close()
 				print java_list[i] + u'更改成功' 
 
 	def write_properties(self):
@@ -120,7 +109,7 @@ class Rewrite(object):
 	def write_res(self):
 		new_keys = self.ver.res_dict.keys()
 		res_file = 'resConst.java'
-		file_obj = open(res_file,'a')
+		file_obj = open('output\\'+res_file,'w')
 		try:
 			for key in new_keys:
 				file_obj.write('String ' + key.upper()+'='+'"'+key+'";'+'\n')  
@@ -131,10 +120,10 @@ class Rewrite(object):
 	def write_locale(self):
 		new_keys = self.ver.locale_dict.keys()
 		locale_file = 'locale.js'
-		file_obj = open(locale_file,'a')
+		file_obj = open('output\\'+locale_file,'w')
 		try:
 			for key in new_keys:
-				file_obj.write(key+':'+'$.i18n.prop('+'\''+key+'\''+')\n' )
+				file_obj.write(key+':'+'$.i18n.prop('+'\''+key+'\''+'),\n' )
 		finally:
 			file_obj.close()
 			print u"js脚本成功输出到locale.js"
