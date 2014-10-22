@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import createmiddle
+import sys
 
 class Verify(object):
 	
@@ -25,23 +26,33 @@ class Verify(object):
 				line = line.strip()
 				if line:
 					key_value_list = line.split(' ')
-					self.locale_dict[key_value_list[0].strip()] = key_value_list[1].strip()
+					if len(key_value_list) != 2:
+						print key_value_list +u'格式不对，英文+空格*n+中文'
+						return 
+					else:
+						self.locale_dict[key_value_list[0].strip()] = key_value_list[1].strip()
 		finally:
 			locale_obj.close()
 
 		res_obj = open(res_file)
 		try:
+			print '------------------'
 			for line in res_obj:
 				line = line.strip()
 				if line:
 					key_value_list = line.split(' ')
-					self.res_dict[key_value_list[0].strip()] = key_value_list[1].strip()
+					if len(key_value_list) != 2:
+						print key_value_list + u'格式不对,英文+空格*n+中文'
+					else:
+						self.res_dict[key_value_list[0].strip()] = key_value_list[1].strip()
 		finally:
 			res_obj.close()
-		
+
 		locale_keys = self.locale_dict.keys()
 		res_keys = self.res_dict.keys()
 		target_keys = locale_keys + res_keys
+
+
 		for key in locale_keys:
 			if key in res_keys:
 				print 'locale.txt has the same key with res.txt, key name: ' + key
@@ -56,6 +67,8 @@ class Verify(object):
 			print 'now system will append key=value properties into source file and replace source Chinese string with set name in jsp,js,java file'
 	
 if __name__ == '__main__':
+	reload(sys)
+	sys.setdefaultencoding('utf-8')
 	verify = Verify()
 	print verify.is_verify
 	print verify.new_dict
