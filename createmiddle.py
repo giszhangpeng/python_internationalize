@@ -41,14 +41,14 @@ class Properties(object):
 
 	def append_dict(self,new_dict):
 		prop_file = self.config['properties']
-		output = open(prop_file,'a')
+		output = open('output\\'+prop_file.split('\\')[-1],'w')
 		try:
 			output.write('\n')
 			for key in new_dict:
 				output.write(key + "=" + new_dict[key].encode('unicode-escape') + "\n")
 		finally:
 			output.close()
-			print prop_file + "插入成功"
+			print prop_file + u"插入成功"
 
 class Process(object):
 	config = Config('config.json')
@@ -123,20 +123,23 @@ class Process(object):
 
 	#write middle file
 	def write_middle_const(self,merged_list,js_list):
-		output = open(self.config['output']['res'],'a')
+		output = open(self.config['output']['res'],'w')
 		for i in range(len(merged_list)):
-			output.write(merged_list[i][0] + "\t" + merged_list[i][1] + "\n")
+			print merged_list
+			output.write(merged_list[i][0] + " " + merged_list[i][1] + "\n")
 		output.close()
-		output = open(self.config['output']['locale'],'a')
+		output = open(self.config['output']['locale'],'w')
 		try:
 			for i in range(len(js_list)):
-				output.write(js_list[i][0] + "\t" + js_list[i][1] + "\n")
+				print js_list
+				output.write(js_list[i][0] + " " + js_list[i][1]+ "\n")
 		finally:
 			output.close()
 
 def main():
 	reload(sys)
 	sys.setdefaultencoding('utf-8')
+	print sys.getdefaultencoding()
 
 	process = Process()
 	
